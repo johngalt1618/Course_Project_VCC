@@ -1,19 +1,13 @@
-# Start with Python 3.8 base image
-FROM python:3.8-slim
+FROM python:3.9-slim
 
-# Set work directory
 WORKDIR /app
 
-# Install dependencies
-COPY requirements.txt requirements.txt
-RUN pip install -r requirements.txt
+COPY requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy all files
-COPY . .
+COPY app.py /app/app.py
 
-# Expose port
+# Expose port 5000 for client service
 EXPOSE 5000
 
-# Start the app
 CMD ["python", "app.py"]
-
