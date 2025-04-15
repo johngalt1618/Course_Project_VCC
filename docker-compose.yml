@@ -1,25 +1,15 @@
-version: '3.8'
-
+version: '3'
 services:
   auth_service:
     build:
       context: ./auth_service
     ports:
-      - "5000:5000"
-    networks:
-      - vcc_network
-
+      - "8080:8080"
+  
   client_service:
     build:
       context: ./client_service
     ports:
-      - "5001:5000"
-    networks:
-      - vcc_network
+      - "5000:5000"  # Expose port 5000 for client service
     depends_on:
       - auth_service
-
-networks:
-  vcc_network:
-    driver: bridge
-
